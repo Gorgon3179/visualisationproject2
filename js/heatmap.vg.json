@@ -1,0 +1,152 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "background": "white",
+  "padding": 5,
+  "width": 300,
+  "height": 300,
+  "signals": [
+    {
+      "name": "selectedYear",
+      "value": 2016,
+      "bind": {
+        "input": "select",
+        "options": [2016, 2021],
+        "labels": ["2016", "2021"],
+        "name": "Year: "
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/Gorgon3179/visualisationproject2/main/heatmapclean.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['Year'] == selectedYear"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "blocks",
+      "type": "rect",
+      "style": ["rect"],
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "fill": {"scale": "color", "field": "Percentage"},
+          "tooltip": {
+            "signal": "{'Birthplace': datum['Region'], 'Percentage': format(datum['Percentage'], '.1f') + '%', 'State': datum['Label'], 'Year': datum['Year']}"
+          },
+          "x": {"scale": "x", "field": "Label"},
+          "width": {"scale": "x", "band": 1},
+          "y": {"scale": "y", "field": "Region"},
+          "height": {"scale": "y", "band": 1}
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "style": ["text"],
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fill": {"value": "white"},
+          "x": {"scale": "x", "field": "Label", "band": 0.5},
+          "y": {"scale": "y", "field": "Region", "band": 0.5},
+          "text": {"signal": "format(datum['Percentage'], '.1f') + '%'"}
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "band",
+      "domain": {"data": "source_0", "field": "Label", "sort": true},
+      "range": [0, {"signal": "width"}],
+      "paddingInner": 0.1,
+      "paddingOuter": 0.05
+    },
+    {
+      "name": "y",
+      "type": "band",
+      "domain": {"data": "source_0", "field": "Region", "sort": true},
+      "range": [0, {"signal": "height"}],
+      "paddingInner": 0.1,
+      "paddingOuter": 0.05
+    },
+    {
+      "name": "color",
+      "type": "quantile",
+      "domain": {"data": "source_0", "field": "Percentage"},
+      "range": [
+        "#fde725", "#b5de2b", "#6ece58", "#35b779", "#1f9e89", 
+        "#26828e", "#31688e", "#3e4989", "#482878", "#440154"
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "scale": "x",
+      "orient": "bottom",
+      "grid": false,
+      "title": "State",
+      "labelAngle": 45,
+      "labelAlign": "left",
+      "labelBaseline": "top",
+      "labelColor": "black",
+      "labelFont": "Lora",
+      "titleFont": "Lora",
+      "titleFontSize": 16,
+      "zindex": 1
+    },
+    {
+      "scale": "y",
+      "orient": "left",
+      "grid": false,
+      "title": "Birthplace",
+      "labelColor": "black",
+      "labelFont": "Lora",
+      "titleFont": "Lora",
+      "titleFontSize": 16,
+      "zindex": 1
+    }
+  ],
+  "legends": [
+    {
+      "format": ".1f",
+      "orient": "right",
+      "title": "Percentage (%)",
+      "fill": "color",
+      "gradientLength": {"signal": "clamp(height, 64, 200)"},
+      "labelColor": "black",
+      "titleColor": "black",
+      "labelFont": "Lora",
+      "titleFont": "Lora"
+    }
+  ],
+  "config": {
+    "axis": {
+      "labelColor": "black",
+      "titleColor": "black",
+      "labelFont": "Lora",
+      "titleFont": "Lora"
+    },
+    "legend": {
+      "labelColor": "black",
+      "titleColor": "black",
+      "labelFont": "Lora",
+      "titleFont": "Lora"
+    },
+    "style": {
+      "text": {"font": "Lora"}
+    }
+  }
+}
