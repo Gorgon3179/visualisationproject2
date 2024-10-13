@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 580,
+  "height": 580,
+  "background": "#cce5ff",
+  "params": [
+    {
+      "name": "zoom_level",
+      "value": 1000,
+      "bind": {
+        "input": "range",
+        "min": 500,
+        "max": 10000,
+        "step": 500,
+        "name": "Zoom Level"
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [144.9631, -37.8136],
+      "bind": {
+        "input": "select",
+        "options": [
+          [133.7751, -25.2744],
+          [144.9631, -37.8136],
+          [151.2093, -33.8688],
+          [153.0278, -27.4679],
+          [115.8605, -31.9505],
+          [147.3257, -42.8821]
+        ],
+        "labels": ["Center", "Melbourne", "Sydney", "Brisbane", "Perth", "Hobart"],
+        "name": "Map Center: "
+      }
+    }
+  ],
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gorgon3179/visualisationproject2/main/Australia.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "SA4_2021_AUST_GDA2020"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.SA4_CODE21",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Gorgon3179/3179vis2/main/Filtered_Migration_Data_2022.csv",
+          "format": { "type": "csv" }
+        },
+        "key": "code",
+        "fields": ["net_overseas_migration", "estimated_population"]
+      }
+    },
+    {
+      "calculate": "100 * datum.net_overseas_migration / datum.estimated_population",
+      "as": "migration_ratio"
+    },
+    {
+      "calculate": "'2021'",
+      "as": "Year"
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "scale": { "expr": "zoom_level" },
+    "center": { "expr": "center_to" }
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "black",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "color": {
+      "field": "migration_ratio",
+      "type": "quantitative",
+      "title": "Migration Ratio (%)",
+      "scale": {
+        "domain": [-3.56, -0.74, -0.27, -0.18, -0.14, -0.09, -0.07, -0.05, 0.03, 0.08, 0.21, 0.25, 0.31, 0.34, 0.38, 0.43, 0.53, 0.67, 0.95, 1.31, 2.12],
+        "range": [
+          "#fde725", "#dde318", "#bade28", "#95d840", "#75d054", "#56c667",
+          "#3dbc74", "#29af7f", "#20a386", "#1f968b", "#238a8d", "#287d8e",
+          "#2d718e", "#33638d", "#39558c", "#404688", "#453781", "#482576",
+          "#481467", "#440154"
+        ]
+      }
+    },
+    "tooltip": [
+      { "field": "properties.SA4_NAME21", "type": "nominal", "title": "Region" },
+      {
+        "field": "migration_ratio",
+        "type": "quantitative",
+        "title": "Migration Ratio (%)",
+        "format": ".2f"
+      },
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": "black",
+      "strokeWidth": 2
+    },
+    "title": {
+      "font": "Lora",
+      "fontSize": 20
+    },
+    "axis": {
+      "labelFont": "Lora",
+      "labelFontSize": 12,
+      "titleFont": "Lora",
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Lora",
+      "labelFontSize": 12,
+      "titleFont": "Lora",
+      "titleFontSize": 12
+    },
+    "header": {
+      "labelFont": "Lora",
+      "titleFont": "Lora"
+    },
+    "style": {
+      "tooltip": {
+        "font": "Lora",   
+        "fontSize": 12,  
+        "fill": "black"   
+      }
+    }
+  }
+}
