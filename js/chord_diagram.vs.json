@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 600,
+  "height": 600,
+
+  "signals": [
+    {
+      "name": "year",
+      "value": "2021",
+      "bind": {
+        "input": "select",
+        "options": ["2021", "2022"],
+        "name": "Year: "
+      }
+    },
+    { "name": "centerX", "update": "width / 2" },
+    { "name": "centerY", "update": "height / 2" },
+    { "name": "inner_radius", "value": 270 },
+    { "name": "outer_radius", "value": 300 }
+  ],
+  "data": [
+    {
+      "name": "arcs",
+      "values": [
+        { "category": "Australia", "startAngle": 0, "endAngle": 0.785,  "color": "#fde725" },
+        { "category": "China", "startAngle": 0.785, "endAngle": 1.571,  "color": "#a0da39" },
+        { "category": "Japan", "startAngle": 1.571, "endAngle": 2.356,  "color": "#4ac16d" },
+        { "category": "United States", "startAngle": 2.356, "endAngle": 3.142, "color": "#1fa187" },
+        { "category": "South Korea", "startAngle": 3.142, "endAngle": 3.927, "color": "#3ca2b6" },
+        { "category": "India", "startAngle": 3.927, "endAngle": 4.712, "color": "#365c8d" },
+        { "category": "Singapore", "startAngle": 4.712, "endAngle": 5.498, "color": "#C6A0C6" },
+        { "category": "New Zealand", "startAngle": 5.498, "endAngle": 6.283, "color": "#440154" }
+      ]
+    },
+    {
+      "name": "connections",
+      "values": [
+        { "source": "Australia", "target": "China", "value_2021": 266962, "value_2022": 316874, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 0.785, "targetEndAngle": 1.571 },
+        { "source": "Australia", "target": "Japan", "value_2021": 66987, "value_2022": 143369, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 1.571, "targetEndAngle": 2.356 },
+        { "source": "Australia", "target": "United States", "value_2021": 67783, "value_2022": 94628, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 2.356, "targetEndAngle": 3.142 },
+        { "source": "Australia", "target": "South Korea", "value_2021": 39444, "value_2022": 77582, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 3.142, "targetEndAngle": 3.927 },
+        { "source": "Australia", "target": "India", "value_2021": 27069, "value_2022": 44970, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 3.927, "targetEndAngle": 4.712 },
+        { "source": "Australia", "target": "Singapore", "value_2021": 28575, "value_2022": 50891, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 4.712, "targetEndAngle": 5.498 },
+        { "source": "Australia", "target": "New Zealand", "value_2021": 23652, "value_2022": 34305, "sourceStartAngle": 0, "sourceEndAngle": 0.785, "targetStartAngle": 5.498, "targetEndAngle": 6.283 }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "(datum.sourceStartAngle + datum.sourceEndAngle) / 2",
+          "as": "sourceAngle"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.targetStartAngle + datum.targetEndAngle) / 2",
+          "as": "targetAngle"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * cos(datum.sourceAngle) + centerX",
+          "as": "x1"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * sin(datum.sourceAngle) + centerY",
+          "as": "y1"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * cos(datum.targetAngle) + centerX",
+          "as": "x2"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * sin(datum.targetAngle) + centerY",
+          "as": "y2"
+        },
+        {
+          "type": "formula",
+          "expr": "'M' + datum.x1 + ',' + datum.y1 + ' Q' + datum.x1 + ',' + centerY + ' ' + datum.x2 + ',' + datum.y2",
+          "as": "path"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "arc",
+      "from": { "data": "arcs" },
+      "encode": {
+        "enter": {
+          "fill": { "field": "color" },
+          "x": { "signal": "centerX" },
+          "y": { "signal": "centerY" }
+        },
+        "update": {
+          "startAngle": { "field": "startAngle" },
+          "endAngle": { "field": "endAngle" },
+          "padAngle": { "value": 0 },
+          "innerRadius": { "signal": "inner_radius" },
+          "outerRadius": { "signal": "outer_radius" }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "arcs" },
+      "encode": {
+        "enter": {
+          "text": { "signal": "datum.category" },
+          "fontSize": { "value": 16 },
+          "align": { "value": "center" },
+          "baseline": { "value": "middle" },
+          "fill": { "value": "black" }
+        },
+        "update": {
+          "x": {
+            "signal": "centerX + (outer_radius + 20) * cos((datum.startAngle + datum.endAngle) / 2)"
+          },
+          "y": {
+            "signal": "centerY + (outer_radius + 20) * sin((datum.startAngle + datum.endAngle) / 2)"
+          }
+        }
+      }
+    },
+    {
+      "type": "path",
+      "from": { "data": "connections" },
+      "encode": {
+        "enter": {
+          "opacity": { "value": 0.8 },
+          "stroke": { "value": "black" },
+          "strokeCap": { "value": "round" }
+        },
+        "update": {
+          "path": { "field": "path" },
+          "strokeWidth": {
+            "signal": "clamp(pow(datum['value_' + year], 0.35) / 6, 2, 25)"
+          },
+          "tooltip": {
+            "signal": "datum.target + ' and Australia: ' + datum['value_' + year] + ' ($ million)'"
+          }
+        }
+      }
+    }
+  ]
+}
