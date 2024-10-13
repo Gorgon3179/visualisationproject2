@@ -45,7 +45,7 @@
       "lookup": "properties.SA4_CODE21",
       "from": {
         "data": {
-          "url": "https://raw.githubusercontent.com/Gorgon3179/3179vis2/main/Filtered_Migration_Data_2022.csv",
+          "url": "https://raw.githubusercontent.com/Gorgon3179/visualisationproject2/main/Filtered_Migration_Data_2022.csv",
           "format": { "type": "csv" }
         },
         "key": "code",
