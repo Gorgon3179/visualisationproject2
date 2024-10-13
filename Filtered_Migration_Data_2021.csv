@@ -1,0 +1,90 @@
+code,label,estimated_population,net_overseas_migration
+101,Capital Region,238522,197
+102,Central Coast,348379,141
+103,Central West,213471,65
+104,Coffs Harbour - Grafton,146115,98
+105,Far West and Orana,117178,102
+106,Hunter Valley exc Newcastle,292906,91
+107,Illawarra,313990,-216
+108,Mid North Coast,228870,62
+109,Murray,123332,48
+110,New England and North West,186942,58
+111,Newcastle and Lake Macquarie,391095,295
+112,Richmond - Tweed,256677,223
+113,Riverina,164231,228
+114,Southern Highlands and Shoalhaven,160722,54
+115,Sydney - Baulkham Hills and Hawkesbury,265266,-129
+116,Sydney - Blacktown,403958,415
+117,Sydney - City and Inner South,335429,-4733
+118,Sydney - Eastern Suburbs,263656,-2666
+119,Sydney - Inner South West,607186,1744
+120,Sydney - Inner West,306292,-227
+121,Sydney - North Sydney and Hornsby,426070,-2744
+122,Sydney - Northern Beaches,264481,-391
+123,Sydney - Outer South West,298999,184
+124,Sydney - Outer West and Blue Mountains,334001,161
+125,Sydney - Parramatta,496672,1282
+126,Sydney - Ryde,202922,-929
+127,Sydney - South West,476152,506
+128,Sydney - Sutherland,230301,141
+201,Ballarat,173266,-137
+202,Bendigo,167196,-143
+203,Geelong,327419,-564
+204,Hume,184129,-145
+205,Latrobe - Gippsland,299758,-150
+206,Melbourne - Inner,627671,-22319
+207,Melbourne - Inner East,377713,-6436
+208,Melbourne - Inner South,427156,-5070
+209,Melbourne - North East,546251,-3032
+210,Melbourne - North West,428954,-2071
+211,Melbourne - Outer East,522777,-1766
+212,Melbourne - South East,870480,-8008
+213,Melbourne - West,863956,-5076
+214,Mornington Peninsula,311199,-589
+215,North West,155140,-277
+216,Shepparton,137375,-246
+217,Warrnambool and South West,127600,-105
+301,Brisbane - East,243487,-293
+302,Brisbane - North,227863,-501
+303,Brisbane - South,377406,-1849
+304,Brisbane - West,192140,-1983
+305,Brisbane Inner City,298121,-4313
+306,Cairns,257149,-486
+307,Darling Downs - Maranoa,130066,-73
+308,Central Queensland,231104,-204
+309,Gold Coast,649659,-1636
+310,Ipswich,374651,-479
+311,Logan - Beaudesert,365653,-540
+312,Mackay - Isaac - Whitsunday,183269,-187
+313,Moreton Bay - North,268995,-285
+314,Moreton Bay - South,221611,-285
+315,Queensland - Outback,81634,-56
+316,Sunshine Coast,403521,-570
+317,Toowoomba,164144,-244
+318,Townsville,237452,-322
+319,Wide Bay,310728,-237
+401,Adelaide - Central and Hills,315867,-1596
+402,Adelaide - North,461302,-545
+403,Adelaide - South,378101,-536
+404,Adelaide - West,247123,-454
+405,Barossa - Yorke - Mid North,116963,-28
+406,South Australia - Outback,85586,-33
+407,South Australia - South East,198250,-124
+501,Bunbury,194994,-131
+502,Mandurah,111299,-78
+503,Perth - Inner,188872,-1843
+504,Perth - North East,286722,-329
+505,Perth - North West,597086,-1075
+506,Perth - South East,549247,-1310
+507,Perth - South West,459003,-747
+509,Western Australia - Wheat Belt,141653,-85
+510,Western Australia - Outback (North),96960,-96
+511,Western Australia - Outback (South),124028,-82
+601,Hobart,251047,-369
+602,Launceston and North East,154914,-55
+603,South East,42821,-8
+604,West and North West,119127,-18
+701,Darwin,148801,-381
+702,Northern Territory - Outback,100399,-86
+801,Australian Capital Territory,453558,-3277
+901,Other Territories,4848,0
