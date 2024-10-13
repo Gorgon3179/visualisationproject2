@@ -111,7 +111,7 @@
           "align": { "value": "center" },
           "baseline": { "value": "middle" },
           "fill": { "value": "black" },
-          "font": { "value": "body" }  
+          "font": { "value": "Lora" }  
         },
         "update": {
           "x": {
@@ -139,7 +139,7 @@
           },
           "tooltip": {
             "signal": "datum.target + ' and Australia: ' + datum['value_' + year] + ' ($ million)'",
-            "font": { "value": "body" }  
+            "font": { "value": "Lora" }  
           }
         }
       }
