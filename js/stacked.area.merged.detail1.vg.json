@@ -25,7 +25,7 @@
         ],
         "name": "Select Category: "
       },
-      "value":0 
+      "value": 0
     }
   ],
   "vconcat": [
@@ -127,7 +127,7 @@
                 "field": "value",
                 "type": "quantitative",
                 "title": "Exports (Millions of Dollars)",
-                "format": ".2f",
+                "format": "d",  // Format as integer
                 "fill": "black",
                 "fontSize": 20,
                 "font": "body"
@@ -233,7 +233,7 @@
                 "field": "positive_import_value",
                 "type": "quantitative",
                 "title": "Imports ($Millions)",
-                "format": ".2f",
+                "format": "d",  // Format as integer
                 "fill": "black",
                 "fontSize": 20,
                 "font": "body"
