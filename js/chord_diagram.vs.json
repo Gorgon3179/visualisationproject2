@@ -110,7 +110,8 @@
           "fontSize": { "value": 16 },
           "align": { "value": "center" },
           "baseline": { "value": "middle" },
-          "fill": { "value": "black" }
+          "fill": { "value": "black" },
+          "font": { "value": "body" }  
         },
         "update": {
           "x": {
@@ -137,7 +138,8 @@
             "signal": "clamp(pow(datum['value_' + year], 0.35) / 6, 2, 25)"
           },
           "tooltip": {
-            "signal": "datum.target + ' and Australia: ' + datum['value_' + year] + ' ($ million)'"
+            "signal": "datum.target + ' and Australia: ' + datum['value_' + year] + ' ($ million)'",
+            "font": { "value": "body" }  
           }
         }
       }
