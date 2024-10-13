@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3179 Vis 2</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+        integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #d3d3d3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 1600px;
+            background-color: #a6ecd5;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+       
+        #title {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid black;
+        }
+
+        
+        .map-box {
+            background-color: #cce5ff;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 48%;
+            margin: auto 0;
+        }
+
+        #title h1 {
+            margin-top: 35px;
+            margin-bottom: 0px;
+            font-size: 60px;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        
+        .maps-title {
+            text-align: center;
+            font-size: 32px;
+            font-family: 'Lora', serif;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        
+        .section-title {
+            text-align: center;
+            font-size: 26px;
+            font-family: 'Lora', serif;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        
+        .centered-title {
+            text-align: center;
+            font-size: 24px;
+            font-family: 'Lora', serif;
+            margin-bottom: 20px;
+        }
+
+        
+        .full-width-box,
+        .bottom-full-width-box {
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        
+        .columns-container,
+        .map-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        
+        .column-box {
+            padding: 10px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .column-1,
+        .column-3 {
+            flex: 1.5;
+        }
+
+        .column-2,
+        .column-4 {
+            flex: 1.5;
+        }
+
+        
+        .bullet-points ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .bullet-points li {
+            margin-bottom: 40px;
+        }
+
+        
+        .column-1 {
+            margin-right: 10px;
+        }
+
+        
+        .chart-box {
+            width: 100%;
+            height: auto;
+            margin-top: 0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0px;
+        }
+
+        
+        .full-width-chart {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        
+        .map-dropdown {
+            font-size: 20px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #cce5ff;
+            color: black;
+            width: 100%;
+        }
+
+        
+        .heatmap-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 80%;
+            position: relative;
+        }
+
+        
+        .chord-diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #chordDiagram {
+            width: 100%;
+            height: 100%;
+        }
+
+        
+        select {
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        
+        .column-3 .bullet-points {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        
+        .references ul {
+            list-style-type: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        .references li {
+            margin-bottom: 10px;
+        }
+
+        .references a {
+            text-decoration: none;
+            color: #0056b3;
+            font-size: 18px;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        
+        <div class="pure-g">
+            <div class="pure-u-1-1" id="title">
+                <h1>What Does The Australian Population and Economy Look Like?</h1>
+            </div>
+        </div>
+
+        
+        <div class="pure-g">
+            <div class="pure-u-1-1 full-width-box">
+                <h2 class="maps-title">Net Migration Across 2021 and 2022 In Australia</h2>
+                <div class="map-container columns-container">
+                    
+                    <div id="map1" class="map-box">
+                        <label for="map1-dropdown">Select Category:</label>
+                        <select id="map1-dropdown" class="map-dropdown">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+
+                    
+                    <div id="map2" class="map-box">
+                        <label for="map2-dropdown">Select Category:</label>
+                        <select id="map2-dropdown" class="map-dropdown">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="pure-g columns-container">
+            
+            <div class="column-box column-1">
+                
+                <h3 class="centered-title">How Does Population Change Affect Australia?</h3>
+
+                
+                <div class="bullet-points">
+                    <ul>
+                        <li>Migration Ratio is defined for a region as the net change in overseas residents divded by the total population</li>
+                        <li>Historically in Australia's capital cities have been increasing in population going from 8.6 million in 1971 to 17.3 million in 2021. Sydney and Melbourne recorded their first population decline in 2020-21 due to the COVID-19 pandemic.</li>
+                        <li>Due to the impacts of COVID-19 and the many policies cities adapted for  public safety many resident left Australia especially from urban centers causing these unforseen changes in population across major cities. </li>
+                        <li>This depopulaiton of cities also caused internal migration into region areas. Between 2016 and 2021, Australia's capital cities experienced a net loss of 160,100 people to regional areas. </li>
+                        <li>The has caused major sectors such as Health and Education which makes up 12.8% of the economny to diminish as these industries rely number of workers and students.</li>
+                        <li>To combat this in 2022 Australia changed its migration policy opening up Australia increasing placements by 35.8% increase compared to 2021 of which 73% were skill visas and 27% were family visas.</li>
+                        <li>The effect of this has been a net gain in population across almost all regions of Australia in a very quick period of time causing increases in cost of living across essentials like housing, utilities and food.</li>
+                    </ul>
+                </div>
+                
+                <h3 class="centered-title">How Is Australia Set To Handle These Changes</h3>
+                <div class="bullet-points">
+                    <ul>
+                        <li>Australia, since 1973 and the abandonment of the White Austrlia Policy has created and increasingly diverse population that has come a host of regions around the world.</li>
+                        <li>This has lead to Australia having a well established populations of many cultures making Australia as easy place for people to integrate into economicaly and culturally.</li>
+                        <li>Between 2016 and 2021 there has been an increase of foriegn born Australian's across multiple states for various regions. With the largest demogrpahic being north west europeans in Western Australia with 11.4% in 2016 and 10.8% in 2021</li>
+                        <li>Historically trends in migration can be seen in the population distribution of Australia with large spikes for 25 to 40 across many time periods. This can be seen for the year 2007 onwards.</li>
+                        <li>Australia like many other developed nations has a increasing growing aging popluation, this requires more and more taxpayers to be able to ensure pensions and basic services</li>
+                        <li>Projecting the current population past 2024 these change for this age range remain. Highlighting that for Australia to succeed we must have an increasing population</li>
+                        <li>But rapid growth in population can also have many unintended consequences to the average person, such as increased competition for jobs leading to low salaries impacting the buying power of all Australians.</li>
+                        <li>This influx has also caused the quantaity imports to sky rocket as the current Australian production cannot sustain the population effectivelly. This has caused Australia to be more reliant on its resource exports the to stabilize the Australian Dollar</li> 
+                    </ul>
+                </div>
+            </div>
+
+            
+            <div class="column-box column-2">
+                
+                <h3 class="section-title">Australian's Born Overseas</h3>
+                <div id="heatmap" class="heatmap-container"></div> 
+                <h3 class="section-title">Australia's Population Distribution</h3>
+                <div id="stackedBarChart" class="chart-box"></div> 
+            </div>
+        </div>
+
+        
+        <div class="pure-g">
+            <div class="pure-u-1-1 bottom-full-width-box full-width-chart">
+                <h3 class="section-title">History of Australian Imports and Exports</h3>
+                <div id="stackedAreaChart" class="chart-box"></div>
+            </div>
+        </div>
+
+        
+        <div class="pure-g columns-container">
+            
+            <div class="column-box column-1 column-3">
+                
+                <h3 class="centered-title">Trade Benefits for Australia's Economy</h3>
+                <div class="bullet-points">
+                    <ul>
+                        <li>Historically Australia has always been a major exporter for raw materials such as iron,coal,natural gas, and critical minerals which have been the backbone of Austrlian econominic growth over the past 40 years.</li>
+                        <li>But in terms of Australia these major exports has been under utilitied as these materials are exported in there raw state allow other economies to add value to these resources selling them back for a premium.  </li>
+                        <li>To overcome this and to help balance trade Australian import and exports. We must look to utilitise this increasing population to add value to out raw reources by creating products that allevite the demand of our imports and can bring added export value.</li>
+                        <li>To do this Austrlia has invested heavily into tafe schemes and education futher helping boost the economic productivity of Austrlia. If we can turn our natural resource into innovative products the future of Australia could be in good hands.</li>
+                        <li>But successful trade also reiles on having stable trade partners willing to communicate and negotiate mutually benefital deals. Australia is quite reliant on its major trading partners China, Japan and the United states which make up 43.9% of our trade, between 2021 and 2022 two way trade with major partners grew 17.1% on average.</li>
+                        <li>Into the future Australia should look more for opporuntites for form new relationships with other nations while better using the natural resrouces at our disposal.
+                </div>
+
+                
+                <h3 class="centered-title">References</h3>
+                <div class="bullet-points references">
+                    <ul>
+                        <li>This visualization made by Andrej Voroncov, released on 13/10/2024, combining Australian Bureau of Statistics data from the following websites:</li>
+                        <li><a href="https://www.kaggle.com/datasets/joebeachcapital/australian-population-data-by-region" target="_blank">Australian Population Data by Region - Kaggle</a></li>
+                        <li><a href="https://www.dfat.gov.au/trade/trade-and-investment-data-information-and-publications/trade-statistics/trade-in-goods-and-services" target="_blank">Trade in Goods and Services - DFAT</a></li>
+                        <li><a href="https://www.abs.gov.au/statistics/people/population/population-clock-pyramid" target="_blank">Population Clock Pyramid - ABS</a></li>
+                        <li><a href="https://www.abs.gov.au/statistics/economy/international-trade/international-trade-goods/latest-release" target="_blank">International Trade in Goods - ABS</a></li>
+                        <li><a href="https://www.abs.gov.au/articles/50-years-capital-city-population-change" target="_blank">Capital City Population Change</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            
+            <div class="column-box column-2 column-4">
+                <h3 class="section-title">Major Australian Two-Way Trade Partners</h3>
+                <div id="chordDiagram" class="chord-diagram-container"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        const embedOptions = {
+            actions: false  
+        };
+
+        
+        vegaEmbed('#map1', 'js/modimap.vg.json', embedOptions).then(function (result) {
+            
+        }).catch(console.error);
+
+        
+        vegaEmbed('#map2', 'js/modimap2.vg.json', embedOptions).then(function (result) {
+            
+        }).catch(console.error);
+
+        
+        vegaEmbed('#heatmap', 'js/heatmap.vg.json', {
+            actions: false,
+            width: document.querySelector('.heatmap-container').offsetWidth,
+            height: document.querySelector('.heatmap-container').offsetWidth
+        }).then(function (result) {
+            
+        }).catch(console.error);
+
+        
+        vegaEmbed('#stackedAreaChart', 'js/stacked.area.merged.detail1.vg.json', {
+            actions: false,
+            width: 1100,  
+            height: 600   
+        }).then(function (result) {
+            const chartContainer = document.querySelector('#stackedAreaChart');
+            chartContainer.style.width = '100%';  
+            chartContainer.style.overflow = 'visible';  
+            chartContainer.querySelector('svg').setAttribute('width', '100%');  
+        }).catch(console.error);
+
+        
+        vegaEmbed('#stackedBarChart', 'js/stacked.bar.multiple.vg.json', {
+            actions: false,
+            width: "container",  
+            height: 900  
+        }).then(function (result) {
+            
+        }).catch(console.error);
+
+        
+        vegaEmbed('#chordDiagram', 'js/chord_diagram.vg.json', {
+            actions: false,
+            width: document.querySelector('.chord-diagram-container').offsetWidth,  
+            height: document.querySelector('.chord-diagram-container').offsetHeight  
+        }).then(function (result) {
+            
+        }).catch(console.error);
+    </script>
+</body>
+
+</html>
